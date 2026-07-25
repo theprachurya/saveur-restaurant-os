@@ -42,9 +42,9 @@ The app runs entirely from [index.html](index.html) and uses localStorage by def
 ### GitHub Pages deployment
 
 1. Push the repository to GitHub.
-2. In repository settings, open **Pages** and choose **GitHub Actions** as the source.
+2. In repository settings, open **Pages** and choose the `gh-pages` branch as the source.
 3. Push to `main` or run the workflow manually.
-4. GitHub Pages will deploy from the repository root using [.github/workflows/deploy-pages.yml](.github/workflows/deploy-pages.yml).
+4. The workflow publishes the site root to `gh-pages` using [.github/workflows/deploy-pages.yml](.github/workflows/deploy-pages.yml).
 
 ## Usage Notes
 
