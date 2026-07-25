@@ -1,102 +1,78 @@
-# Saveur Restaurant OS - GitHub Pages + Database Setup
+# Saveur Restaurant OS
 
-## What was implemented
+Saveur Restaurant OS is a browser-based restaurant management and ordering demo built as a static frontend. It supports separate customer and owner workflows, menu browsing, cart and order handling, inventory-aware stock updates, feedback, notifications, and a lightweight QA test screen.
 
-The app now includes complete end-to-end functionality for customer and owner workflows:
+The app runs entirely from [index.html](index.html) and uses localStorage by default. If you provide Supabase credentials in [config.js](config.js), the same data model can persist to Supabase Postgres instead.
 
-- Role-based registration/login with OTP demo verification.
-- Customer pages: dashboard, menu browse/search/filter, item details, cart, order confirmation, tracking, order history, reorder, feedback, profile, notifications.
-- Owner pages: dashboard, menu management (add/edit/delete/enable/disable), incoming orders (accept/reject/status updates), revenue analytics, inventory, profile, notifications.
-- Stock-safe ordering:
-  - Cart quantity cannot exceed stock.
-  - Stock is decremented on order placement.
-  - Items auto-disable when stock reaches zero.
-  - Low stock alerts are generated automatically.
-- Real-time-like order progression simulation (auto status updates every 12 seconds).
-- Persistence:
-  - LocalStorage fallback works out of the box.
-  - Supabase persistence is supported when configured.
-- QA suite page (`QA Tests`) that runs acceptance-focused checks in-browser.
+## Features
 
-## Database recommendation
+- Customer and owner role selection during registration and sign-in.
+- Customer flows for browsing the menu, filtering/searching items, managing the cart, placing orders, viewing order history, reordering, and leaving feedback.
+- Owner flows for managing menu items, handling incoming orders, tracking revenue, and monitoring inventory.
+- Stock-safe ordering rules so quantities cannot exceed available stock.
+- Automatic low-stock alerts and item disabling when stock reaches zero.
+- Notification feed filtered by role and user.
+- In-browser QA page for basic acceptance checks.
 
-Recommended database: **Supabase Postgres**.
+## Project Structure
 
-Why this is the best fit for your GitHub Pages frontend:
+- [index.html](index.html) - main application shell, styles, and runtime logic.
+- [config.js](config.js) - runtime config for optional Supabase credentials.
+- [supabase-schema.sql](supabase-schema.sql) - database schema and permissive demo policies for Supabase.
+- [.github/workflows/deploy-pages.yml](.github/workflows/deploy-pages.yml) - GitHub Pages deployment workflow.
+- [saveur_restaurant_os (1).html](saveur_restaurant_os%20(1).html) - standalone HTML export included in the repo.
 
-- Works well with static hosting (frontend-only app).
-- Managed PostgreSQL with SQL support.
-- Simple JavaScript SDK from browser.
-- Real-time options for future improvements.
-- Generous free tier and easy setup.
+## Getting Started
 
-Alternative options:
+### Local use
 
-- Firebase Firestore (great for NoSQL and realtime).
-- Neon + serverless API (more custom backend work needed).
+1. Clone the repository.
+2. Open [index.html](index.html) in a browser, or serve the folder with any static file server.
+3. The app will use localStorage automatically if Supabase is not configured.
 
-For your feature set (orders, menus, inventory, revenue), relational data is a strong fit, so Supabase/Postgres is the recommended default.
-
-## Supabase setup
+### Optional Supabase setup
 
 1. Create a Supabase project.
-2. Open SQL Editor and run [supabase-schema.sql](supabase-schema.sql).
-3. In [config.js](config.js), set:
-   - `window.SAVEUR_SUPABASE_URL`
-   - `window.SAVEUR_SUPABASE_ANON_KEY`
-4. Commit and deploy.
+2. Open the SQL editor and run [supabase-schema.sql](supabase-schema.sql).
+3. Set the following values in [config.js](config.js):
+  - `window.SAVEUR_SUPABASE_URL`
+  - `window.SAVEUR_SUPABASE_ANON_KEY`
+4. Refresh the app. If both values are present, the app will try to read and write Supabase data.
 
-If config values are empty, the app automatically runs in local mode.
+### GitHub Pages deployment
 
-## GitHub Pages deployment
+1. Push the repository to GitHub.
+2. In repository settings, open **Pages** and choose **GitHub Actions** as the source.
+3. Push to `main` or run the workflow manually.
+4. GitHub Pages will deploy from the repository root using [.github/workflows/deploy-pages.yml](.github/workflows/deploy-pages.yml).
 
-This repo includes workflow [deploy-pages.yml](.github/workflows/deploy-pages.yml).
+## Usage Notes
 
-1. Push this folder to a GitHub repository (branch `main`).
-2. In GitHub repo settings:
-   - Go to **Pages**.
-   - Set **Source** to **GitHub Actions**.
-3. Push to `main` (or run workflow manually from Actions tab).
-4. Your site will be published at your GitHub Pages URL.
+- Registration includes an OTP demo flow and password length validation.
+- The app supports customer and owner roles, so make sure you sign in with the correct role.
+- The `QA Tests` page is useful for checking cart, ordering, status progression, feedback, and stock behavior.
+- If Supabase config is missing or invalid, the app falls back to local mode automatically.
 
-## App entrypoint
+## Database Notes
 
-GitHub Pages uses [index.html](index.html) (copied from your updated file).
+The included schema is intentionally simple and demo-friendly:
 
-## Test coverage and validation
+- Tables cover users, menu items, orders, feedback, and notifications.
+- Row-level security is enabled, but the policies are permissive for ease of setup.
+- For production use, replace the demo auth and policies with Supabase Auth and stricter access rules.
 
-Run tests inside the app:
+## Tech Stack
 
-1. Login as customer or owner.
-2. Open `QA Tests` from sidebar.
-3. Click `Run All Tests`.
+- HTML, CSS, and vanilla JavaScript
+- Supabase JS client loaded from a CDN
+- GitHub Pages for static hosting
 
-The suite validates key use cases:
+## Security Caveat
 
-- cart add/update and order creation
-- status progression
-- low-stock logic
-- feedback persistence
-- core flow integrity
+This project is suitable as a demo or prototype, but it is not production-hardened:
 
-Also manually validate:
+- Authentication is client-side and demo-oriented.
+- Credentials and records are visible to the browser in local/demo mode.
+- The Supabase policies are wide open for simplicity.
 
-- Registration with OTP demo and password length enforcement
-- Login errors for invalid credentials
-- Owner can accept/reject/advance orders
-- Revenue dashboard values update from actual orders
-- Inventory auto-unavailability at zero stock
-- Notifications filtered by role/user
-
-## Security note
-
-This build is production-like for workflow, but still a demo architecture:
-
-- Passwords are stored directly in client-visible storage/schema.
-- Row-level policies are currently permissive for easy setup.
-
-For production hardening, add:
-
-- Supabase Auth (instead of custom client-side auth)
-- strict RLS policies by authenticated user/role
-- secure server-side business checks
+For a real deployment, add secure authentication, stricter authorization rules, and server-side validation.
