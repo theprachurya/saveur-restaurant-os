@@ -1113,7 +1113,7 @@ pages.revenue = () => {
         ['Total Revenue',`$${monthlyRevenue.toFixed(2)}`,`${monthlyOrders.length} orders this month`],
         ['Avg. Order Value',`$${avgOrderValue.toFixed(2)}`,`${growthPct>=0?'+':''}${growthPct}% WoW`],
         ['Total Orders',String(monthlyOrders.length),'This month'],
-        ['Top Item',topItems[0]?.name || 'N/A',`${topItems[0]?.orders || 0} sold'],
+        ['Top Item',topItems[0]?.name || 'N/A',`${topItems[0]?.orders || 0} sold`],
       ].map(([l,v,s])=>`
         <div class="stat-card">
           <div class="label" style="font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px">${l}</div>

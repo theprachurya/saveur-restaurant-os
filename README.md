@@ -19,7 +19,6 @@ The app runs entirely from [index.html](index.html) and uses localStorage by def
 - [index.html](index.html) - main application shell, styles, and runtime logic.
 - [config.js](config.js) - runtime config for optional Supabase credentials.
 - [supabase-schema.sql](supabase-schema.sql) - database schema and permissive demo policies for Supabase.
-- [.github/workflows/deploy-pages.yml](.github/workflows/deploy-pages.yml) - GitHub Pages deployment workflow.
 - [saveur_restaurant_os (1).html](saveur_restaurant_os%20(1).html) - standalone HTML export included in the repo.
 
 ## Getting Started
@@ -39,12 +38,12 @@ The app runs entirely from [index.html](index.html) and uses localStorage by def
   - `window.SAVEUR_SUPABASE_ANON_KEY`
 4. Refresh the app. If both values are present, the app will try to read and write Supabase data.
 
-### GitHub Pages deployment
+### Vercel deployment
 
-1. Push the repository to GitHub.
-2. In repository settings, open **Pages** and choose the `gh-pages` branch as the source.
-3. Push to `main` or run the workflow manually.
-4. The workflow publishes the site root to `gh-pages` using [.github/workflows/deploy-pages.yml](.github/workflows/deploy-pages.yml).
+1. Import the repository into Vercel.
+2. Set the project to deploy from the repository root.
+3. Vercel will serve [index.html](index.html) as the site entrypoint.
+4. The live site is available at [https://saveur-restaurant-os.vercel.app/](https://saveur-restaurant-os.vercel.app/).
 
 ## Usage Notes
 
@@ -65,7 +64,7 @@ The included schema is intentionally simple and demo-friendly:
 
 - HTML, CSS, and vanilla JavaScript
 - Supabase JS client loaded from a CDN
-- GitHub Pages for static hosting
+- Vercel for static hosting
 
 ## Security Caveat
 
