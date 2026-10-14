@@ -1,0 +1,19 @@
+{
+  "name": "saveur-restaurant-os",
+  "version": "2.0.0",
+  "description": "Kitchen operations, recipe management, and inventory-safe restaurant ordering platform",
+  "type": "module",
+  "scripts": {
+    "test": "node --test test/*.test.mjs",
+    "start": "npx serve ."
+  },
+  "keywords": [
+    "restaurant",
+    "inventory",
+    "kitchenops",
+    "supabase",
+    "vercel"
+  ],
+  "author": "Prachurya Subhasmita",
+  "license": "MIT"
+}
