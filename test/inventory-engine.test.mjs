@@ -243,5 +243,30 @@ describe("Saveur KitchenOps Inventory & Ordering Engine", () => {
       INITIAL_INGREDIENTS.find((i) => i.id === "ing_truffle").stock
     );
   });
+
+  test("supports menu management: update existing dish and add new dish", () => {
+    const engine = new InventoryEngine();
+
+    // Update dish
+    const updated = engine.updateMenuItem("dish_1", {
+      name: "Deluxe Truffle Risotto",
+      price: 26.5,
+      isAvailable: false,
+    });
+    assert.equal(updated.name, "Deluxe Truffle Risotto");
+    assert.equal(updated.price, 26.5);
+    assert.equal(updated.isAvailable, false);
+
+    // Add new dish
+    const newDish = engine.addMenuItem({
+      name: "Tarte Tatin",
+      price: 11.0,
+      cat: "desserts",
+      emoji: "🥧",
+      desc: "Caramelized apple tart",
+    });
+    assert.equal(newDish.name, "Tarte Tatin");
+    assert.equal(engine.getMenuItem(newDish.id).price, 11.0);
+  });
 });
 

@@ -57,7 +57,7 @@ h1, h2, h3, h4, .font-serif {
 
 /* Sidebar */
 .sidebar {
-  width: 250px;
+  width: 260px;
   background-color: var(--ink);
   color: #fff;
   display: flex;
@@ -71,7 +71,7 @@ h1, h2, h3, h4, .font-serif {
 }
 
 .brand {
-  padding: 0 1.5rem 1.5rem;
+  padding: 0 1.5rem 1.25rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 .brand h2 {
@@ -90,10 +90,55 @@ h1, h2, h3, h4, .font-serif {
   margin-top: 2px;
 }
 
+/* Portal Role Switcher */
+.portal-switcher {
+  display: flex;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 3px;
+  margin: 1.25rem 1.25rem 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+.portal-btn {
+  flex: 1;
+  padding: 8px 10px;
+  border: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-family: inherit;
+}
+.portal-btn:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.04);
+}
+.portal-btn.active {
+  background: var(--rust);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(189, 69, 34, 0.35);
+}
+
+.nav-section-title {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: rgba(255, 255, 255, 0.35);
+  padding: 1rem 1.5rem 0.4rem;
+  font-weight: 700;
+}
+
 .nav-links {
   list-style: none;
-  margin-top: 1rem;
   flex: 1;
+  overflow-y: auto;
 }
 
 .nav-item {
@@ -132,7 +177,7 @@ h1, h2, h3, h4, .font-serif {
 
 /* Main Content Area */
 .main-wrapper {
-  margin-left: 250px;
+  margin-left: 260px;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -140,8 +185,8 @@ h1, h2, h3, h4, .font-serif {
 }
 
 .topbar {
-  height: 60px;
-  background: rgba(253, 249, 243, 0.85);
+  height: 64px;
+  background: rgba(253, 249, 243, 0.9);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
   display: flex;
@@ -177,7 +222,7 @@ h1, h2, h3, h4, .font-serif {
   background-color: var(--rust);
   color: #fff;
 }
-.btn-primary:hover {
+.btn-primary:hover:not(:disabled) {
   background-color: var(--rust-dark);
 }
 .btn-outline {
@@ -185,7 +230,7 @@ h1, h2, h3, h4, .font-serif {
   border-color: var(--border);
   color: var(--ink);
 }
-.btn-outline:hover {
+.btn-outline:hover:not(:disabled) {
   border-color: var(--muted);
   background-color: #fff;
 }
@@ -193,13 +238,17 @@ h1, h2, h3, h4, .font-serif {
   background-color: var(--gold);
   color: #fff;
 }
-.btn-gold:hover {
+.btn-gold:hover:not(:disabled) {
   background-color: #b0811f;
 }
 .btn-sm {
   padding: 6px 12px;
   font-size: 12px;
   border-radius: 7px;
+}
+.btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
 }
 
 /* Cards & Badges */
@@ -260,6 +309,88 @@ h1, h2, h3, h4, .font-serif {
   flex-direction: column;
 }
 
+/* Out of Stock Greying Out */
+.menu-card.sold-out {
+  opacity: 0.52;
+  filter: grayscale(1);
+  background: #F7F3EE;
+  border-color: #DDD4C8;
+}
+.menu-card.sold-out .menu-card-header {
+  background: #EAE3D9;
+}
+.menu-card.sold-out button {
+  cursor: not-allowed;
+  background: #E2DAD0;
+  color: #796C5F;
+  border-color: #D3C9BC;
+}
+
+/* Category Filter Tabs */
+.cat-filters {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+.cat-pill {
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  border: 1px solid var(--border);
+  background: #fff;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.cat-pill:hover {
+  border-color: var(--rust);
+  color: var(--ink);
+}
+.cat-pill.active {
+  background: var(--rust);
+  color: #fff;
+  border-color: var(--rust);
+}
+
+/* Dashboard Metric Cards */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+.stat-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.25rem 1.5rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+}
+.stat-label {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--muted);
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.stat-value {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--ink);
+  font-family: 'DM Sans', sans-serif;
+  letter-spacing: -0.5px;
+}
+.stat-sub {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 6px;
+}
+
 /* Kitchen Kanban */
 .kanban-board {
   display: grid;
@@ -268,7 +399,7 @@ h1, h2, h3, h4, .font-serif {
   margin-top: 1.5rem;
 }
 .kanban-col {
-  background: rgba(232, 223, 212, 0.4);
+  background: rgba(232, 223, 212, 0.45);
   border-radius: 14px;
   padding: 1rem;
   min-height: 480px;
@@ -288,7 +419,7 @@ h1, h2, h3, h4, .font-serif {
 .modal-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(23, 17, 11, 0.5);
+  background: rgba(23, 17, 11, 0.55);
   backdrop-filter: blur(4px);
   display: flex;
   align-items: center;
@@ -299,7 +430,7 @@ h1, h2, h3, h4, .font-serif {
 .modal-box {
   background: #fff;
   border-radius: 18px;
-  max-width: 520px;
+  max-width: 540px;
   width: 100%;
   padding: 2rem;
   box-shadow: var(--shadow-lg);
@@ -356,17 +487,21 @@ h1, h2, h3, h4, .font-serif {
 }
 
 /* Responsive Media Queries */
-@media (max-width: 820px) {
+@media (max-width: 860px) {
   .sidebar {
-    width: 68px;
+    width: 72px;
     padding: 1rem 0;
   }
-  .brand h2, .brand span, .nav-item span:not(.icon), .sidebar-footer {
+  .brand h2, .brand span, .nav-item span:not(.icon), .sidebar-footer, .nav-section-title, .portal-btn span:not(.p-icon) {
     display: none;
   }
   .brand {
     padding: 0 0.5rem 1rem;
     text-align: center;
+  }
+  .portal-switcher {
+    flex-direction: column;
+    margin: 0.5rem;
   }
   .nav-item {
     padding: 12px;
@@ -377,7 +512,7 @@ h1, h2, h3, h4, .font-serif {
     margin: 0;
   }
   .main-wrapper {
-    margin-left: 68px;
+    margin-left: 72px;
   }
   .topbar, .content-pane {
     padding: 1rem 1.25rem;
@@ -396,22 +531,43 @@ h1, h2, h3, h4, .font-serif {
 <script type="module">
 import { InventoryEngine } from './src/engine/inventory-engine.mjs';
 
-// Application State
+// Application State Keys
+const STORAGE_KEY = 'saveur_kitchenops_state';
+const ROLE_KEY = 'saveur_active_role';
+const VIEW_KEY = 'saveur_active_view';
+const CART_KEY = 'saveur_cart_state';
+const CUSTOMER_ORDERS_KEY = 'saveur_customer_orders';
+
+// Initialize Engine
 const engine = new InventoryEngine();
 
-// Persistent Local storage sync
-const STORAGE_KEY = 'saveur_kitchenops_state';
-const saved = localStorage.getItem(STORAGE_KEY);
-if (saved) {
+// Load persistent local storage state
+const savedState = localStorage.getItem(STORAGE_KEY);
+if (savedState) {
   try {
-    const parsed = JSON.parse(saved);
+    const parsed = JSON.parse(savedState);
     if (parsed.ingredients) engine.ingredients = new Map(parsed.ingredients.map(i => [i.id, i]));
     if (parsed.orders) engine.orders = parsed.orders;
     if (parsed.movements) engine.movements = parsed.movements;
     if (parsed.wasteLogs) engine.wasteLogs = parsed.wasteLogs;
+    if (parsed.menu) engine.menu = parsed.menu;
   } catch (err) {
     console.warn('Failed to load local storage state:', err);
   }
+}
+
+// Restore saved cart
+let initialCart = [];
+const savedCart = localStorage.getItem(CART_KEY);
+if (savedCart) {
+  try { initialCart = JSON.parse(savedCart); } catch (e) {}
+}
+
+// Restore customer placed order IDs
+let initialCustomerOrders = [];
+const savedCustOrders = localStorage.getItem(CUSTOMER_ORDERS_KEY);
+if (savedCustOrders) {
+  try { initialCustomerOrders = JSON.parse(savedCustOrders); } catch (e) {}
 }
 
 function persist() {
@@ -420,19 +576,77 @@ function persist() {
     orders: engine.orders,
     movements: engine.movements,
     wasteLogs: engine.wasteLogs,
+    menu: engine.menu,
   }));
+  localStorage.setItem(CART_KEY, JSON.stringify(S.cart));
+  localStorage.setItem(CUSTOMER_ORDERS_KEY, JSON.stringify(S.customerOrders));
 }
 
+// Global UI State
 const S = {
-  view: 'customer-menu', // 'customer-menu', 'kitchen-kds', 'inventory', 'ledger', 'qa-runner'
-  cart: [],
+  role: 'customer', // 'customer' or 'owner'
+  view: 'customer-menu', // customer-menu, customer-orders, owner-dashboard, owner-kds, owner-menu, owner-inventory, owner-ledger, owner-qa
+  cart: initialCart,
+  customerOrders: initialCustomerOrders,
   selectedCategory: 'all',
-  activeModal: null, // 'cart', 'recipe', 'delivery', 'waste', 'order-success'
+  activeModal: null, // 'cart', 'order-success', 'delivery', 'waste', 'recipe', 'edit-dish', 'add-dish'
   selectedDishId: null,
   latestOrder: null,
   qaLog: [],
   qaRunning: false,
 };
+
+// Route and Hash synchronization
+function syncRouteFromHash() {
+  const hash = window.location.hash.replace(/^#\/?/, '').trim();
+  if (hash) {
+    const parts = hash.split('/');
+    const rolePart = parts[0];
+    const viewPart = parts[1];
+
+    if (rolePart === 'customer' || rolePart === 'owner') {
+      S.role = rolePart;
+    }
+    if (viewPart) {
+      S.view = viewPart;
+    }
+  } else {
+    // Fall back to saved localStorage preferences
+    const savedRole = localStorage.getItem(ROLE_KEY);
+    const savedView = localStorage.getItem(VIEW_KEY);
+    if (savedRole === 'customer' || savedRole === 'owner') {
+      S.role = savedRole;
+    }
+    if (savedView) {
+      S.view = savedView;
+    }
+  }
+
+  // Validate that current view matches active role
+  if (S.role === 'customer') {
+    if (!['customer-menu', 'customer-orders'].includes(S.view)) {
+      S.view = 'customer-menu';
+    }
+  } else {
+    if (!['owner-dashboard', 'owner-kds', 'owner-menu', 'owner-inventory', 'owner-ledger', 'owner-qa'].includes(S.view)) {
+      S.view = 'owner-dashboard';
+    }
+  }
+
+  // Keep hash and storage updated
+  localStorage.setItem(ROLE_KEY, S.role);
+  localStorage.setItem(VIEW_KEY, S.view);
+  if (window.location.hash !== `#${S.role}/${S.view}`) {
+    window.location.hash = `${S.role}/${S.view}`;
+  }
+}
+
+// Run initial route sync
+syncRouteFromHash();
+window.addEventListener('hashchange', () => {
+  syncRouteFromHash();
+  render();
+});
 
 function toast(msg) {
   const el = document.createElement('div');
@@ -441,24 +655,49 @@ function toast(msg) {
   document.getElementById('toast-container').appendChild(el);
   setTimeout(() => el.remove(), 3200);
 }
-
 window.toast = toast;
 
-// ─── Controller Actions ──────────────────────────────────────
+// ─── Actions & Navigation ──────────────────────────────────────
+
+window.switchRole = function(newRole) {
+  if (S.role === newRole) return;
+  S.role = newRole;
+  if (newRole === 'customer') {
+    S.view = 'customer-menu';
+  } else {
+    S.view = 'owner-dashboard';
+  }
+  localStorage.setItem(ROLE_KEY, S.role);
+  localStorage.setItem(VIEW_KEY, S.view);
+  window.location.hash = `${S.role}/${S.view}`;
+  render();
+};
 
 window.navigate = function(view) {
   S.view = view;
+  localStorage.setItem(VIEW_KEY, view);
+  window.location.hash = `${S.role}/${S.view}`;
+  render();
+};
+
+window.setCategory = function(cat) {
+  S.selectedCategory = cat;
   render();
 };
 
 window.addToCart = function(dishId) {
   const dish = engine.getMenuItem(dishId);
+  if (!dish || dish.isAvailable === false) {
+    toast('This item is currently unavailable.');
+    return;
+  }
+
   const maxAvail = engine.calculateAvailablePortions(dishId);
   const existing = S.cart.find(c => c.id === dishId);
   const currentQty = existing ? existing.qty : 0;
 
   if (currentQty + 1 > maxAvail) {
-    toast(`Cannot add more: Only ${maxAvail} portions can be made with current kitchen stock.`);
+    toast(`Cannot add more: Only ${maxAvail} portions available from kitchen stock.`);
     return;
   }
 
@@ -467,6 +706,7 @@ window.addToCart = function(dishId) {
   } else {
     S.cart.push({ id: dishId, qty: 1 });
   }
+  persist();
   toast(`Added ${dish.name} to order`);
   render();
 };
@@ -489,6 +729,7 @@ window.updateCartQty = function(dishId, delta) {
   } else {
     S.cart[idx].qty = nextQty;
   }
+  persist();
   render();
 };
 
@@ -507,17 +748,21 @@ window.submitOrder = function() {
   if (S.cart.length === 0) return;
 
   try {
+    const tableNum = Math.floor(1 + Math.random() * 12);
     const result = engine.processOrder({
       customerId: 'cust_' + Math.floor(100 + Math.random() * 900),
-      customerName: 'Dine-In Table 4',
+      customerName: `Dine-In Table ${tableNum}`,
       items: S.cart,
     });
 
-    persist();
+    // Save order ID to customer tracking list
+    S.customerOrders.unshift(result.order.id);
     S.latestOrder = result.order;
     S.cart = [];
+    persist();
+
     S.activeModal = 'order-success';
-    toast('Order confirmed! Stock deducted atomically.');
+    toast('Order confirmed! Sent to Kitchen Display System.');
     render();
   } catch (err) {
     alert(`Order Rejected: ${err.message}`);
@@ -527,8 +772,20 @@ window.submitOrder = function() {
 window.advanceOrderStatus = function(orderId, nextStatus) {
   engine.updateOrderStatus(orderId, nextStatus);
   persist();
-  toast(`Order #${orderId} moved to ${nextStatus}`);
+  toast(`Order #${orderId.slice(-6)} moved to ${nextStatus}`);
   render();
+};
+
+window.cancelOrder = function(orderId) {
+  if (!confirm(`Cancel Order #${orderId.slice(-6)} and return reserved ingredients to kitchen stock?`)) return;
+  try {
+    engine.updateOrderStatus(orderId, 'Cancelled');
+    persist();
+    toast(`Order #${orderId.slice(-6)} cancelled. Ingredients restored!`);
+    render();
+  } catch (err) {
+    alert(err.message);
+  }
 };
 
 window.submitDelivery = function(e) {
@@ -573,33 +830,74 @@ window.submitWaste = function(e) {
   }
 };
 
-window.cancelOrder = function(orderId) {
-  if (!confirm(`Cancel Order #${orderId.slice(-6)} and return reserved ingredients to kitchen stock?`)) return;
+// Owner Menu Updating Actions
+window.submitEditDish = function(e) {
+  e.preventDefault();
+  const id = S.selectedDishId;
+  const name = document.getElementById('edit-dish-name').value;
+  const price = parseFloat(document.getElementById('edit-dish-price').value);
+  const cat = document.getElementById('edit-dish-cat').value;
+  const emoji = document.getElementById('edit-dish-emoji').value;
+  const desc = document.getElementById('edit-dish-desc').value;
+  const isAvailable = document.getElementById('edit-dish-avail').checked;
+
   try {
-    engine.updateOrderStatus(orderId, 'Cancelled');
+    engine.updateMenuItem(id, { name, price, cat, emoji, desc, isAvailable });
     persist();
-    toast(`Order #${orderId.slice(-6)} cancelled. Ingredients restored!`);
+    closeModal();
+    toast(`Menu item "${name}" updated successfully!`);
     render();
   } catch (err) {
     alert(err.message);
   }
 };
 
+window.submitAddDish = function(e) {
+  e.preventDefault();
+  const name = document.getElementById('add-dish-name').value;
+  const price = parseFloat(document.getElementById('add-dish-price').value);
+  const cat = document.getElementById('add-dish-cat').value;
+  const emoji = document.getElementById('add-dish-emoji').value || '🍽️';
+  const desc = document.getElementById('add-dish-desc').value;
+
+  try {
+    engine.addMenuItem({ name, price, cat, emoji, desc, isAvailable: true });
+    persist();
+    closeModal();
+    toast(`Added "${name}" to restaurant menu!`);
+    render();
+  } catch (err) {
+    alert(err.message);
+  }
+};
+
+window.toggleDishAvailability = function(dishId) {
+  const dish = engine.getMenuItem(dishId);
+  if (!dish) return;
+  const nextStatus = dish.isAvailable !== false ? false : true;
+  engine.updateMenuItem(dishId, { isAvailable: nextStatus });
+  persist();
+  toast(`${dish.name} is now ${nextStatus ? 'Available' : 'Paused / Inactive'}`);
+  render();
+};
+
 window.resetDemoData = function() {
-  if (confirm("Reset kitchen inventory, orders, and ledger to factory demo state?")) {
+  if (confirm("Reset restaurant inventory, orders, and ledger to factory demo state?")) {
     localStorage.removeItem(STORAGE_KEY);
+    localStorage.removeItem(CART_KEY);
+    localStorage.removeItem(CUSTOMER_ORDERS_KEY);
     engine.resetToDefaults();
     S.cart = [];
+    S.customerOrders = [];
     S.activeModal = null;
     S.latestOrder = null;
     S.qaLog = [];
-    toast("KitchenOps reset to factory demo state.");
+    toast("Saveur Restaurant OS reset to factory demo state.");
     render();
   }
 };
 
-// ─── Automated Interactive Acceptance Test Runner ────────────
-
+// Automated Acceptance & Concurrency Tester
 window.runConcurrencyTest = async function() {
   S.qaRunning = true;
   S.qaLog = [];
@@ -611,15 +909,13 @@ window.runConcurrencyTest = async function() {
   };
 
   appendLog('▶ Starting Concurrency & Overselling Prevention Test...');
-  await new Promise(r => setTimeout(r, 400));
+  await new Promise(r => setTimeout(r, 350));
 
-  // Ensure potatoes and butter have plenty of stock so steak is strictly the isolated bottleneck
   const pot = engine.getIngredient('ing_potatoes');
   if (pot && pot.stock < 10) pot.stock = 25.0;
   const butter = engine.getIngredient('ing_butter');
   if (butter && butter.stock < 2) butter.stock = 5.0;
 
-  // Calibrate steak inventory to exactly 3 portions through the double-entry ledger
   const steak = engine.getIngredient('ing_steak');
   const delta = 3 - steak.stock;
   if (delta > 0) {
@@ -630,7 +926,7 @@ window.runConcurrencyTest = async function() {
   appendLog(`🧪 Calibrated Ribeye Steak inventory to exactly 3 pieces via ledger.`);
 
   appendLog('⚡ Simulating 6 rapid concurrent orders for Steak Frites (1 portion each)...');
-  await new Promise(r => setTimeout(r, 600));
+  await new Promise(r => setTimeout(r, 500));
 
   let successful = 0;
   let blocked = 0;
@@ -650,7 +946,7 @@ window.runConcurrencyTest = async function() {
     }
   }
 
-  await new Promise(r => setTimeout(r, 400));
+  await new Promise(r => setTimeout(r, 350));
   appendLog(`📊 Test Result: ${successful} Accepted, ${blocked} Blocked.`);
   
   if (successful === 3 && blocked === 3 && steak.stock === 0) {
@@ -659,7 +955,6 @@ window.runConcurrencyTest = async function() {
     appendLog('❌ FAIL: Inconsistent stock condition detected.');
   }
 
-  // Audit check
   const audit = engine.auditLedgerIntegrity();
   appendLog(`📜 Ledger Audit Status: ${audit.isValid ? 'VERIFIED MATCH (100% Consistent)' : 'DISCREPANCY FOUND'}`);
 
@@ -668,11 +963,10 @@ window.runConcurrencyTest = async function() {
   render();
 };
 
-// ─── View Renderers ──────────────────────────────────────────
+// ─── UI Render Engine ────────────────────────────────────────
 
 function render() {
   const app = document.getElementById('app');
-
   const cartCount = S.cart.reduce((s, i) => s + i.qty, 0);
 
   app.innerHTML = `
@@ -682,48 +976,87 @@ function render() {
         <h2>Saveur</h2>
         <span>Restaurant OS & KitchenOps</span>
       </div>
+
+      <!-- Portal Switcher -->
+      <div class="portal-switcher">
+        <button class="portal-btn ${S.role === 'customer' ? 'active' : ''}" onclick="switchRole('customer')">
+          <span class="p-icon">🍽️</span> <span>Customer</span>
+        </button>
+        <button class="portal-btn ${S.role === 'owner' ? 'active' : ''}" onclick="switchRole('owner')">
+          <span class="p-icon">👑</span> <span>Owner</span>
+        </button>
+      </div>
+
+      <!-- Role-Based Navigation -->
       <ul class="nav-links">
-        <li class="nav-item ${S.view === 'customer-menu' ? 'active' : ''}" onclick="navigate('customer-menu')">
-          <span class="icon">🍽️</span> <span>Order & Dine</span>
-        </li>
-        <li class="nav-item ${S.view === 'kitchen-kds' ? 'active' : ''}" onclick="navigate('kitchen-kds')">
-          <span class="icon">👨‍🍳</span> <span>Kitchen KDS</span>
-        </li>
-        <li class="nav-item ${S.view === 'inventory' ? 'active' : ''}" onclick="navigate('inventory')">
-          <span class="icon">📦</span> <span>Inventory & Recipes</span>
-        </li>
-        <li class="nav-item ${S.view === 'ledger' ? 'active' : ''}" onclick="navigate('ledger')">
-          <span class="icon">📜</span> <span>Stock Ledger</span>
-        </li>
-        <li class="nav-item ${S.view === 'qa-runner' ? 'active' : ''}" onclick="navigate('qa-runner')">
-          <span class="icon">🧪</span> <span>QA & Concurrency</span>
-        </li>
+        ${S.role === 'customer' ? `
+          <div class="nav-section-title">Customer Dining</div>
+          <li class="nav-item ${S.view === 'customer-menu' ? 'active' : ''}" onclick="navigate('customer-menu')">
+            <span class="icon">🍽️</span> <span>Order & Dine</span>
+          </li>
+          <li class="nav-item ${S.view === 'customer-orders' ? 'active' : ''}" onclick="navigate('customer-orders')">
+            <span class="icon">📋</span> <span>Track My Orders</span>
+          </li>
+        ` : `
+          <div class="nav-section-title">Owner Administration</div>
+          <li class="nav-item ${S.view === 'owner-dashboard' ? 'active' : ''}" onclick="navigate('owner-dashboard')">
+            <span class="icon">📊</span> <span>Dashboard & Income</span>
+          </li>
+          <li class="nav-item ${S.view === 'owner-kds' ? 'active' : ''}" onclick="navigate('owner-kds')">
+            <span class="icon">👨‍🍳</span> <span>Kitchen KDS</span>
+          </li>
+          <li class="nav-item ${S.view === 'owner-menu' ? 'active' : ''}" onclick="navigate('owner-menu')">
+            <span class="icon">📝</span> <span>Menu Management</span>
+          </li>
+          <li class="nav-item ${S.view === 'owner-inventory' ? 'active' : ''}" onclick="navigate('owner-inventory')">
+            <span class="icon">📦</span> <span>Inventory & Stock</span>
+          </li>
+          <li class="nav-item ${S.view === 'owner-ledger' ? 'active' : ''}" onclick="navigate('owner-ledger')">
+            <span class="icon">📜</span> <span>Stock Ledger & Audit</span>
+          </li>
+          <li class="nav-item ${S.view === 'owner-qa' ? 'active' : ''}" onclick="navigate('owner-qa')">
+            <span class="icon">🧪</span> <span>QA & Concurrency</span>
+          </li>
+        `}
       </ul>
+
       <div class="sidebar-footer">
-        <div>Supabase Postgres: <strong style="color:var(--gold)">Connected</strong></div>
-        <div style="margin-top:4px">Vercel Deployment Ready</div>
+        <div>Active Role: <strong style="color:var(--gold)">${S.role === 'customer' ? 'Customer Portal' : 'Restaurant Owner'}</strong></div>
+        <div style="margin-top:4px">Persistence: <strong style="color:var(--sage)">Active (State Saved)</strong></div>
         <button onclick="resetDemoData()" style="background:none;border:none;color:rgba(255,255,255,0.45);cursor:pointer;font-size:11px;margin-top:8px;padding:0;text-decoration:underline">
           Reset Demo State ↺
         </button>
       </div>
     </nav>
 
-    <!-- Main Wrapper -->
+    <!-- Main Content Wrapper -->
     <div class="main-wrapper">
       <header class="topbar">
-        <div style="font-size:14px;color:var(--muted)">
-          Mode: <strong style="color:var(--ink)">KitchenOps V2.0</strong>
-        </div>
         <div style="display:flex;align-items:center;gap:12px">
-          <button class="btn btn-outline btn-sm" onclick="resetDemoData()" title="Reset kitchen inventory, orders, and ledger to factory demo state">
-            ↺ Reset Demo
+          <span class="badge ${S.role === 'customer' ? 'badge-amber' : 'badge-green'}" style="font-size:12px;padding:5px 12px">
+            ${S.role === 'customer' ? '🍽️ Customer Dining Mode' : '👑 Restaurant Owner Command Center'}
+          </span>
+          <span style="font-size:13px;color:var(--muted)">
+            ${S.role === 'customer' ? 'Browse seasonal dishes & order' : 'Live operations, finances & stock control'}
+          </span>
+        </div>
+
+        <div style="display:flex;align-items:center;gap:12px">
+          ${S.role === 'customer' ? `
+            <button class="btn btn-primary btn-sm" onclick="openModal('cart')">
+              🛒 View Cart (${cartCount})
+            </button>
+          ` : `
+            <button class="btn btn-outline btn-sm" onclick="openModal('add-dish')">
+              + New Dish
+            </button>
+            <button class="btn btn-primary btn-sm" onclick="openModal('delivery')">
+              + Log Delivery
+            </button>
+          `}
+          <button class="btn btn-outline btn-sm" onclick="resetDemoData()" title="Reset kitchen inventory, orders, and ledger">
+            ↺ Reset
           </button>
-          <button class="btn btn-outline btn-sm" onclick="openModal('cart')">
-            🛒 Cart (${cartCount})
-          </button>
-          <div style="font-size:13px;background:var(--sage-light);color:var(--sage);padding:4px 10px;border-radius:20px;font-weight:600">
-            ● Atomic Sync Active
-          </div>
         </div>
       </header>
 
@@ -738,72 +1071,465 @@ function render() {
 }
 
 function renderCurrentView() {
-  switch (S.view) {
-    case 'customer-menu': return renderCustomerMenu();
-    case 'kitchen-kds': return renderKitchenKds();
-    case 'inventory': return renderInventory();
-    case 'ledger': return renderLedger();
-    case 'qa-runner': return renderQaRunner();
-    default: return renderCustomerMenu();
+  if (S.role === 'customer') {
+    switch (S.view) {
+      case 'customer-menu': return renderCustomerMenu();
+      case 'customer-orders': return renderCustomerOrders();
+      default: return renderCustomerMenu();
+    }
+  } else {
+    switch (S.view) {
+      case 'owner-dashboard': return renderOwnerDashboard();
+      case 'owner-kds': return renderOwnerKds();
+      case 'owner-menu': return renderOwnerMenu();
+      case 'owner-inventory': return renderOwnerInventory();
+      case 'owner-ledger': return renderOwnerLedger();
+      case 'owner-qa': return renderOwnerQa();
+      default: return renderOwnerDashboard();
+    }
   }
 }
 
-// 1. Customer Menu View
+// ─────────────────────────────────────────────────────────────
+// 1. CUSTOMER PORTAL VIEWS
+// ─────────────────────────────────────────────────────────────
+
 function renderCustomerMenu() {
   const dishes = engine.getMenuItems();
+  const filteredDishes = S.selectedCategory === 'all' 
+    ? dishes 
+    : dishes.filter(d => d.cat === S.selectedCategory);
+
+  const categories = [
+    { id: 'all', label: 'All Items' },
+    { id: 'starters', label: 'Starters' },
+    { id: 'mains', label: 'Mains' },
+    { id: 'desserts', label: 'Desserts' },
+  ];
 
   return `
     <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:1.5rem">
       <div>
-        <h1 style="font-size:28px">Our Seasonal Menu</h1>
+        <h1 style="font-size:30px">Our Seasonal Menu</h1>
         <p style="color:var(--muted);font-size:14px;margin-top:4px">
-          Live kitchen availability dynamically updated from real-time recipe ingredients.
+          Fresh handcrafted cuisine prepared to order by our kitchen team.
         </p>
+        
+        <!-- Category Filter Pills -->
+        <div class="cat-filters">
+          ${categories.map(c => `
+            <button class="cat-pill ${S.selectedCategory === c.id ? 'active' : ''}" onclick="setCategory('${c.id}')">
+              ${c.label}
+            </button>
+          `).join('')}
+        </div>
       </div>
+
       <div>
         <button class="btn btn-primary" onclick="openModal('cart')">
-          Review Order & Checkout (${S.cart.reduce((s,i)=>s+i.qty,0)})
+          Review Order (${S.cart.reduce((s,i)=>s+i.qty,0)}) →
         </button>
       </div>
     </div>
 
     <div class="menu-grid">
-      ${dishes.map(dish => `
-        <div class="menu-card">
-          <div class="menu-card-header">${dish.emoji}</div>
-          <div class="menu-card-body">
-            <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px">
-              <h3 style="font-size:18px">${dish.name}</h3>
-              <span class="font-serif" style="font-size:18px;color:var(--rust);font-weight:700">$${dish.price.toFixed(2)}</span>
-            </div>
-            <p style="font-size:12.5px;color:var(--muted);margin-bottom:1rem;flex:1">${dish.desc}</p>
-            
-            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;font-size:12px">
-              <span class="badge ${dish.availablePortions > 5 ? 'badge-green' : dish.availablePortions > 0 ? 'badge-amber' : 'badge-red'}">
-                ${dish.availablePortions > 0 ? `${dish.availablePortions} portions left` : 'Sold out'}
-              </span>
-              <button class="btn btn-outline btn-sm" onclick="openModal('recipe', '${dish.id}')">
-                Recipe Specs
+      ${filteredDishes.map(dish => {
+        const isSoldOut = dish.availablePortions === 0 || dish.isAvailable === false;
+
+        return `
+          <div class="menu-card ${isSoldOut ? 'sold-out' : ''}">
+            <div class="menu-card-header">${dish.emoji || '🍽️'}</div>
+            <div class="menu-card-body">
+              <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px">
+                <h3 style="font-size:18px">${dish.name}</h3>
+                <span class="font-serif" style="font-size:18px;color:var(--rust);font-weight:700">$${dish.price.toFixed(2)}</span>
+              </div>
+              <p style="font-size:12.5px;color:var(--muted);margin-bottom:1rem;flex:1">${dish.desc || ''}</p>
+              
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;font-size:12px">
+                ${isSoldOut ? `
+                  <span class="badge badge-red">Sold Out</span>
+                  <span style="font-size:11px;color:var(--muted)">Unavailable today</span>
+                ` : `
+                  <span class="badge ${dish.availablePortions <= 3 ? 'badge-amber' : 'badge-green'}">
+                    ${dish.availablePortions <= 5 ? `${dish.availablePortions} portions left` : 'Fresh & In Stock'}
+                  </span>
+                  <span style="font-size:11px;color:var(--sage)">Available now</span>
+                `}
+              </div>
+
+              <button 
+                class="btn ${isSoldOut ? 'btn-outline' : 'btn-primary'}" 
+                style="width:100%" 
+                ${isSoldOut ? 'disabled' : ''}
+                onclick="addToCart('${dish.id}')"
+              >
+                ${isSoldOut ? 'Sold Out' : '+ Add to Order'}
               </button>
             </div>
-
-            <button 
-              class="btn ${dish.availablePortions > 0 ? 'btn-primary' : 'btn-outline'}" 
-              style="width:100%" 
-              ${dish.availablePortions === 0 ? 'disabled' : ''}
-              onclick="addToCart('${dish.id}')"
-            >
-              ${dish.availablePortions > 0 ? '+ Add to Order' : 'Unavailable'}
-            </button>
           </div>
-        </div>
-      `).join('')}
+        `;
+      }).join('')}
     </div>
   `;
 }
 
-// 2. Kitchen KDS View
-function renderKitchenKds() {
+function renderCustomerOrders() {
+  const allOrders = engine.orders;
+  // Filter orders that belong to this customer session, or display recent dine-in orders
+  const myOrders = allOrders.filter(o => S.customerOrders.includes(o.id));
+
+  return `
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:1.75rem">
+      <div>
+        <h1 style="font-size:30px">Track My Orders</h1>
+        <p style="color:var(--muted);font-size:14px;margin-top:4px">
+          Live kitchen preparation and service progression for your table.
+        </p>
+      </div>
+      <div>
+        <button class="btn btn-outline" onclick="navigate('customer-menu')">
+          ← Back to Menu
+        </button>
+      </div>
+    </div>
+
+    ${myOrders.length === 0 ? `
+      <div class="card" style="text-align:center;padding:3.5rem 1.5rem">
+        <div style="font-size:42px;margin-bottom:12px">🍽️</div>
+        <h3 style="font-size:20px;margin-bottom:6px">No orders placed yet</h3>
+        <p style="color:var(--muted);font-size:13.5px;max-width:400px;margin:0 auto 1.5rem">
+          Select handcrafted items from our seasonal menu and confirm your order to track kitchen preparation here.
+        </p>
+        <button class="btn btn-primary" onclick="navigate('customer-menu')">
+          Browse Menu & Order
+        </button>
+      </div>
+    ` : `
+      <div style="display:flex;flex-direction:column;gap:1.25rem">
+        ${myOrders.map(o => {
+          const statusColors = {
+            Confirmed: 'badge-amber',
+            Preparing: 'badge-amber',
+            Ready: 'badge-green',
+            Delivered: 'badge-muted',
+            Cancelled: 'badge-red',
+          };
+          const statusSteps = ['Confirmed', 'Preparing', 'Ready', 'Delivered'];
+          const currentStepIdx = statusSteps.indexOf(o.status);
+
+          return `
+            <div class="card">
+              <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);padding-bottom:1rem;margin-bottom:1rem">
+                <div>
+                  <div style="display:flex;align-items:center;gap:10px">
+                    <h3 style="font-size:18px">Order #${o.id.slice(-6)}</h3>
+                    <span class="badge ${statusColors[o.status] || 'badge-muted'}">${o.status}</span>
+                  </div>
+                  <div style="font-size:12px;color:var(--muted);margin-top:2px">
+                    Placed at ${new Date(o.createdAt).toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'})} • ${o.customerName}
+                  </div>
+                </div>
+                <div style="text-align:right">
+                  <div class="font-serif" style="font-size:20px;font-weight:700;color:var(--rust)">$${o.total.toFixed(2)}</div>
+                  <div style="font-size:11px;color:var(--muted)">Includes tax (8%)</div>
+                </div>
+              </div>
+
+              <!-- Order Progression Timeline -->
+              ${o.status !== 'Cancelled' ? `
+                <div style="display:flex;justify-content:space-between;align-items:center;background:var(--cream);border-radius:10px;padding:12px 18px;margin-bottom:1.25rem">
+                  ${statusSteps.map((step, idx) => {
+                    const isDone = currentStepIdx >= idx;
+                    const isCurrent = currentStepIdx === idx;
+                    return `
+                      <div style="display:flex;align-items:center;gap:8px;opacity:${isDone ? 1 : 0.4}">
+                        <div style="width:24px;height:24px;border-radius:50%;background:${isDone ? 'var(--rust)' : 'var(--border)'};color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700">
+                          ${isDone ? '✓' : idx + 1}
+                        </div>
+                        <span style="font-size:12.5px;font-weight:${isCurrent ? '700' : '500'};color:${isCurrent ? 'var(--rust)' : 'var(--ink)'}">
+                          ${step === 'Ready' ? 'Ready for Pickup' : step === 'Delivered' ? 'Served' : step}
+                        </span>
+                      </div>
+                      ${idx < statusSteps.length - 1 ? `<div style="flex:1;height:2px;background:${currentStepIdx > idx ? 'var(--rust)' : 'var(--border)'};margin:0 10px"></div>` : ''}
+                    `;
+                  }).join('')}
+                </div>
+              ` : `
+                <div style="background:var(--red-light);color:var(--red);padding:10px 14px;border-radius:8px;font-size:13px;margin-bottom:1rem">
+                  This order was cancelled and ingredients were refunded to kitchen inventory.
+                </div>
+              `}
+
+              <!-- Order Items List -->
+              <table class="table-custom">
+                <thead>
+                  <tr><th>Item</th><th>Quantity</th><th>Unit Price</th><th>Subtotal</th></tr>
+                </thead>
+                <tbody>
+                  ${o.items.map(it => `
+                    <tr>
+                      <td><strong>${it.name}</strong></td>
+                      <td class="font-mono">${it.qty}</td>
+                      <td class="font-mono">$${it.price.toFixed(2)}</td>
+                      <td class="font-mono" style="font-weight:600">$${it.subtotal.toFixed(2)}</td>
+                    </tr>
+                  `).join('')}
+                </tbody>
+              </table>
+            </div>
+          `;
+        }).join('')}
+      </div>
+    `}
+  `;
+}
+
+// ─────────────────────────────────────────────────────────────
+// 2. RESTAURANT OWNER PORTAL VIEWS
+// ─────────────────────────────────────────────────────────────
+
+function renderOwnerDashboard() {
+  const orders = engine.orders;
+  const validOrders = orders.filter(o => o.status !== 'Cancelled');
+  
+  // Financial Calculations
+  const grossIncome = validOrders.reduce((sum, o) => sum + o.total, 0);
+  const netSales = validOrders.reduce((sum, o) => sum + o.subtotal, 0);
+  const totalTax = validOrders.reduce((sum, o) => sum + o.tax, 0);
+
+  // Cost of goods sold (COGS) from ingredient consumption movements
+  const cogs = engine.movements
+    .filter(m => m.movementType === 'order_consumption')
+    .reduce((sum, m) => {
+      const ing = engine.getIngredient(m.ingredientId);
+      const unitCost = ing ? ing.cost : 0;
+      return sum + (Math.abs(m.delta) * unitCost);
+    }, 0);
+
+  const grossProfit = Math.max(0, netSales - cogs);
+  const profitMargin = netSales > 0 ? ((grossProfit / netSales) * 100).toFixed(1) : 0;
+
+  // Operational metrics
+  const activeOrders = orders.filter(o => ['Confirmed', 'Preparing', 'Ready'].includes(o.status)).length;
+  const deliveredOrders = orders.filter(o => o.status === 'Delivered').length;
+  const lowStockCount = engine.getIngredients().filter(i => i.stock <= i.threshold).length;
+  const totalWasteCost = engine.wasteLogs.reduce((sum, w) => sum + (w.costImpact || 0), 0);
+  const menuItems = engine.getMenuItems();
+
+  return `
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:2rem">
+      <div>
+        <h1 style="font-size:30px">Restaurant Owner Dashboard</h1>
+        <p style="color:var(--muted);font-size:14px;margin-top:4px">
+          Live financial performance, kitchen flow, and warehouse status overview.
+        </p>
+      </div>
+
+      <div style="display:flex;gap:10px">
+        <button class="btn btn-outline" onclick="navigate('owner-menu')">
+          📝 Manage Menu
+        </button>
+        <button class="btn btn-outline" onclick="navigate('owner-kds')">
+          👨‍🍳 Open KDS (${activeOrders})
+        </button>
+        <button class="btn btn-primary" onclick="openModal('delivery')">
+          + Restock Delivery
+        </button>
+      </div>
+    </div>
+
+    <!-- Income & Financial Overview Grid -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <span class="stat-label">Total Revenue (Gross Income)</span>
+        <span class="stat-value font-serif" style="color:var(--rust)">$${grossIncome.toFixed(2)}</span>
+        <span class="stat-sub">From ${validOrders.length} confirmed orders ($${totalTax.toFixed(2)} tax collected)</span>
+      </div>
+
+      <div class="stat-card">
+        <span class="stat-label">Estimated Gross Profit</span>
+        <span class="stat-value font-serif" style="color:var(--sage)">$${grossProfit.toFixed(2)}</span>
+        <span class="stat-sub">${profitMargin}% margin after ingredient food costs</span>
+      </div>
+
+      <div class="stat-card">
+        <span class="stat-label">Active Kitchen Tickets</span>
+        <span class="stat-value font-serif">${activeOrders}</span>
+        <span class="stat-sub">${deliveredOrders} orders served successfully</span>
+      </div>
+
+      <div class="stat-card">
+        <span class="stat-label">Low Stock Warnings</span>
+        <span class="stat-value font-serif" style="color:${lowStockCount > 0 ? 'var(--red)' : 'var(--sage)'}">${lowStockCount}</span>
+        <span class="stat-sub">${lowStockCount > 0 ? 'Requires supplier reordering' : 'All ingredients optimal'}</span>
+      </div>
+    </div>
+
+    <!-- Operations & Quick Control Rows -->
+    <div style="display:grid;grid-template-columns:2fr 1fr;gap:1.5rem;margin-bottom:2rem">
+      <!-- Recent Orders & Sales Log -->
+      <div class="card" style="padding:0;overflow:hidden">
+        <div style="padding:1.25rem 1.5rem;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center">
+          <div>
+            <h3 style="font-size:16px">Recent Orders & Revenue</h3>
+            <p style="font-size:12px;color:var(--muted)">Atomic double-entry transaction records</p>
+          </div>
+          <button class="btn btn-outline btn-sm" onclick="navigate('owner-kds')">View All KDS →</button>
+        </div>
+
+        <table class="table-custom">
+          <thead>
+            <tr>
+              <th>Order ID</th>
+              <th>Customer</th>
+              <th>Items</th>
+              <th>Total</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${orders.length === 0 ? '<tr><td colspan="5" style="text-align:center;padding:2rem">No orders placed yet</td></tr>' : ''}
+            ${orders.slice(0, 6).map(o => `
+              <tr>
+                <td class="font-mono"><strong>#${o.id.slice(-6)}</strong></td>
+                <td>${o.customerName}</td>
+                <td>${o.items.map(i => `${i.qty}× ${i.name}`).join(', ')}</td>
+                <td class="font-mono font-serif" style="font-weight:700;color:var(--rust)">$${o.total.toFixed(2)}</td>
+                <td>
+                  <span class="badge ${o.status === 'Ready' || o.status === 'Delivered' ? 'badge-green' : o.status === 'Cancelled' ? 'badge-red' : 'badge-amber'}">
+                    ${o.status}
+                  </span>
+                </td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Quick Restaurant Health Panel -->
+      <div style="display:flex;flex-direction:column;gap:1.25rem">
+        <div class="card">
+          <h3 style="font-size:16px;margin-bottom:8px">Inventory Health</h3>
+          <p style="font-size:12.5px;color:var(--muted);margin-bottom:1rem">
+            Live ingredient warehouse status and recorded kitchen waste.
+          </p>
+          <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:8px;border-bottom:1px solid var(--border);padding-bottom:8px">
+            <span>Ingredients Tracked:</span>
+            <strong>${engine.getIngredients().length} items</strong>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:8px;border-bottom:1px solid var(--border);padding-bottom:8px">
+            <span>Recorded Waste Loss:</span>
+            <strong style="color:var(--red)">$${totalWasteCost.toFixed(2)}</strong>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:1.25rem">
+            <span>Ledger Movements:</span>
+            <strong>${engine.movements.length} transactions</strong>
+          </div>
+          <div style="display:flex;gap:8px">
+            <button class="btn btn-outline btn-sm" style="flex:1" onclick="navigate('owner-inventory')">Inventory</button>
+            <button class="btn btn-outline btn-sm" style="flex:1" onclick="navigate('owner-ledger')">Ledger</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 style="font-size:16px;margin-bottom:8px">Menu Status</h3>
+          <p style="font-size:12.5px;color:var(--muted);margin-bottom:1rem">
+            ${menuItems.length} active catalog dishes.
+          </p>
+          <div style="display:flex;gap:8px">
+            <button class="btn btn-primary btn-sm" style="flex:1" onclick="openModal('add-dish')">+ Add New Dish</button>
+            <button class="btn btn-outline btn-sm" style="flex:1" onclick="navigate('owner-menu')">Edit Menu</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function renderOwnerMenu() {
+  const dishes = engine.getMenuItems();
+
+  return `
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:1.5rem">
+      <div>
+        <h1 style="font-size:30px">Menu & Pricing Management</h1>
+        <p style="color:var(--muted);font-size:14px;margin-top:4px">
+          Update prices, dish descriptions, categories, active availability, and inspect recipes.
+        </p>
+      </div>
+      <div>
+        <button class="btn btn-primary" onclick="openModal('add-dish')">
+          + Add New Dish
+        </button>
+      </div>
+    </div>
+
+    <div class="card" style="padding:0;overflow:hidden">
+      <table class="table-custom">
+        <thead>
+          <tr>
+            <th>Dish</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Makable Portions</th>
+            <th>Availability</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${dishes.map(dish => {
+            const isPaused = dish.isAvailable === false;
+            return `
+              <tr>
+                <td>
+                  <div style="display:flex;align-items:center;gap:12px">
+                    <span style="font-size:24px">${dish.emoji || '🍽️'}</span>
+                    <div>
+                      <strong>${dish.name}</strong>
+                      <div style="font-size:12px;color:var(--muted)">${dish.desc || ''}</div>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <span class="badge badge-muted" style="text-transform:capitalize">${dish.cat}</span>
+                </td>
+                <td class="font-mono font-serif" style="font-size:16px;font-weight:700;color:var(--rust)">
+                  $${dish.price.toFixed(2)}
+                </td>
+                <td>
+                  <span class="badge ${dish.availablePortions > 5 ? 'badge-green' : dish.availablePortions > 0 ? 'badge-amber' : 'badge-red'}">
+                    ${dish.availablePortions} portions
+                  </span>
+                </td>
+                <td>
+                  <span class="badge ${!isPaused && dish.availablePortions > 0 ? 'badge-green' : 'badge-red'}">
+                    ${isPaused ? 'Paused by Owner' : dish.availablePortions === 0 ? 'Sold Out' : 'Active'}
+                  </span>
+                </td>
+                <td>
+                  <div style="display:flex;gap:6px">
+                    <button class="btn btn-outline btn-sm" onclick="openModal('edit-dish', '${dish.id}')">
+                      ✎ Edit
+                    </button>
+                    <button class="btn btn-outline btn-sm" onclick="toggleDishAvailability('${dish.id}')">
+                      ${isPaused ? 'Resume' : 'Pause'}
+                    </button>
+                    <button class="btn btn-outline btn-sm" onclick="openModal('recipe', '${dish.id}')">
+                      Recipe
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            `;
+          }).join('')}
+        </tbody>
+      </table>
+    </div>
+  `;
+}
+
+function renderOwnerKds() {
   const orders = engine.orders;
   const stages = [
     { id: 'Confirmed', label: 'New Orders', badge: 'badge-amber' },
@@ -813,11 +1539,18 @@ function renderKitchenKds() {
   ];
 
   return `
-    <div style="margin-bottom:1.5rem">
-      <h1 style="font-size:28px">Kitchen Display System (KDS)</h1>
-      <p style="color:var(--muted);font-size:14px;margin-top:4px">
-        Real-time order line tracking with kitchen station progression.
-      </p>
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:1.5rem">
+      <div>
+        <h1 style="font-size:30px">Kitchen Display System (KDS)</h1>
+        <p style="color:var(--muted);font-size:14px;margin-top:4px">
+          Kitchen station ticket pipeline with atomic order cancellation and inventory return.
+        </p>
+      </div>
+      <div>
+        <button class="btn btn-outline" onclick="navigate('owner-dashboard')">
+          ← Back to Dashboard
+        </button>
+      </div>
     </div>
 
     <div class="kanban-board">
@@ -875,14 +1608,13 @@ function renderKitchenKds() {
   `;
 }
 
-// 3. Inventory & Recipe View
-function renderInventory() {
+function renderOwnerInventory() {
   const ingredients = engine.getIngredients();
 
   return `
     <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:1.5rem">
       <div>
-        <h1 style="font-size:28px">Ingredient Inventory & Recipes</h1>
+        <h1 style="font-size:30px">Warehouse Inventory & Stock</h1>
         <p style="color:var(--muted);font-size:14px;margin-top:4px">
           Live warehouse stocks, minimum thresholds, and supplier deliveries.
         </p>
@@ -934,15 +1666,14 @@ function renderInventory() {
   `;
 }
 
-// 4. Ledger View
-function renderLedger() {
+function renderOwnerLedger() {
   const movements = [...engine.movements].reverse();
   const audit = engine.auditLedgerIntegrity();
 
   return `
     <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:1.5rem">
       <div>
-        <h1 style="font-size:28px">Stock Movements Audit Ledger</h1>
+        <h1 style="font-size:30px">Stock Movements Audit Ledger</h1>
         <p style="color:var(--muted);font-size:14px;margin-top:4px">
           Immutable double-entry log of all consumption, deliveries, and waste.
         </p>
@@ -990,11 +1721,10 @@ function renderLedger() {
   `;
 }
 
-// 5. Interactive QA & Concurrency View
-function renderQaRunner() {
+function renderOwnerQa() {
   return `
     <div style="margin-bottom:1.5rem">
-      <h1 style="font-size:28px">Automated Acceptance & Concurrency Tester</h1>
+      <h1 style="font-size:30px">Automated Acceptance & Concurrency Tester</h1>
       <p style="color:var(--muted);font-size:14px;margin-top:4px">
         Interactively simulate concurrent customer requests, test race conditions, and verify mathematical ledger consistency.
       </p>
@@ -1022,7 +1752,9 @@ function renderQaRunner() {
   `;
 }
 
-// ─── Modal Renderer ──────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────
+// 3. MODALS RENDERER
+// ─────────────────────────────────────────────────────────────
 
 function renderModal() {
   if (!S.activeModal) return '';
@@ -1030,7 +1762,7 @@ function renderModal() {
   if (S.activeModal === 'cart') {
     const subtotal = S.cart.reduce((s, it) => {
       const dish = engine.getMenuItem(it.id);
-      return s + dish.price * it.qty;
+      return s + (dish ? dish.price * it.qty : 0);
     }, 0);
     const tax = subtotal * 0.08;
     const total = subtotal + tax;
@@ -1043,10 +1775,11 @@ function renderModal() {
             <button class="btn btn-outline btn-sm" onclick="closeModal()">✕</button>
           </div>
 
-          ${S.cart.length === 0 ? '<p style="text-align:center;padding:2rem;color:var(--muted)">Your cart is empty.</p>' : `
+          ${S.cart.length === 0 ? '<p style="text-align:center;padding:2rem;color:var(--muted)">Your cart is currently empty.</p>' : `
             <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:1.5rem">
               ${S.cart.map(it => {
                 const dish = engine.getMenuItem(it.id);
+                if (!dish) return '';
                 return `
                   <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);padding-bottom:10px">
                     <div>
@@ -1092,21 +1825,112 @@ function renderModal() {
           <div style="font-size:48px;margin-bottom:12px">🎉</div>
           <h2 style="font-size:24px;margin-bottom:6px">Order Confirmed!</h2>
           <p style="color:var(--muted);font-size:13px;margin-bottom:1.5rem">
-            Order #${o.id} has been accepted and dispatched to the Kitchen Display System.
+            Order #${o.id.slice(-6)} has been received and queued in the kitchen.
           </p>
           <div class="card" style="background:var(--cream);text-align:left;margin-bottom:1.5rem;font-size:13px">
             <div style="margin-bottom:8px"><strong>Table:</strong> ${o.customerName}</div>
             <div style="margin-bottom:8px"><strong>Total Amount:</strong> $${o.total.toFixed(2)}</div>
-            <div><strong>Status:</strong> <span class="badge badge-green">${o.status}</span></div>
+            <div><strong>Status:</strong> <span class="badge badge-amber">${o.status}</span></div>
           </div>
           <div style="display:flex;gap:10px">
             <button class="btn btn-outline" style="flex:1" onclick="closeModal()">
               Close
             </button>
-            <button class="btn btn-primary" style="flex:1" onclick="closeModal(); navigate('kitchen-kds')">
-              View in KDS →
+            <button class="btn btn-primary" style="flex:1" onclick="closeModal(); navigate('customer-orders')">
+              Track My Order →
             </button>
           </div>
+        </div>
+      </div>
+    `;
+  }
+
+  if (S.activeModal === 'edit-dish' && S.selectedDishId) {
+    const dish = engine.getMenuItem(S.selectedDishId);
+    if (!dish) return '';
+
+    return `
+      <div class="modal-backdrop">
+        <div class="modal-box">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem">
+            <h2 style="font-size:20px">Edit Menu Item: ${dish.name}</h2>
+            <button class="btn btn-outline btn-sm" onclick="closeModal()">✕</button>
+          </div>
+          <form onsubmit="submitEditDish(event)" style="display:flex;flex-direction:column;gap:14px">
+            <div>
+              <label style="display:block;font-size:12px;font-weight:600;margin-bottom:4px">Dish Name</label>
+              <input id="edit-dish-name" type="text" value="${dish.name}" required style="width:100%;padding:10px;border-radius:8px;border:1px solid var(--border)">
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+              <div>
+                <label style="display:block;font-size:12px;font-weight:600;margin-bottom:4px">Price ($)</label>
+                <input id="edit-dish-price" type="number" step="0.01" min="0" value="${dish.price.toFixed(2)}" required style="width:100%;padding:10px;border-radius:8px;border:1px solid var(--border)">
+              </div>
+              <div>
+                <label style="display:block;font-size:12px;font-weight:600;margin-bottom:4px">Category</label>
+                <select id="edit-dish-cat" style="width:100%;padding:10px;border-radius:8px;border:1px solid var(--border)">
+                  <option value="starters" ${dish.cat === 'starters' ? 'selected' : ''}>Starters</option>
+                  <option value="mains" ${dish.cat === 'mains' ? 'selected' : ''}>Mains</option>
+                  <option value="desserts" ${dish.cat === 'desserts' ? 'selected' : ''}>Desserts</option>
+                </select>
+              </div>
+            </div>
+            <div>
+              <label style="display:block;font-size:12px;font-weight:600;margin-bottom:4px">Emoji Icon</label>
+              <input id="edit-dish-emoji" type="text" value="${dish.emoji || '🍽️'}" style="width:100%;padding:10px;border-radius:8px;border:1px solid var(--border)">
+            </div>
+            <div>
+              <label style="display:block;font-size:12px;font-weight:600;margin-bottom:4px">Description</label>
+              <textarea id="edit-dish-desc" rows="3" style="width:100%;padding:10px;border-radius:8px;border:1px solid var(--border)">${dish.desc || ''}</textarea>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px">
+              <input id="edit-dish-avail" type="checkbox" ${dish.isAvailable !== false ? 'checked' : ''} style="width:16px;height:16px">
+              <label for="edit-dish-avail" style="font-size:13px;font-weight:600">Active and available for customer ordering</label>
+            </div>
+            <button type="submit" class="btn btn-primary" style="margin-top:10px">Save Changes</button>
+          </form>
+        </div>
+      </div>
+    `;
+  }
+
+  if (S.activeModal === 'add-dish') {
+    return `
+      <div class="modal-backdrop">
+        <div class="modal-box">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem">
+            <h2 style="font-size:20px">Add New Menu Dish</h2>
+            <button class="btn btn-outline btn-sm" onclick="closeModal()">✕</button>
+          </div>
+          <form onsubmit="submitAddDish(event)" style="display:flex;flex-direction:column;gap:14px">
+            <div>
+              <label style="display:block;font-size:12px;font-weight:600;margin-bottom:4px">Dish Name</label>
+              <input id="add-dish-name" type="text" required placeholder="e.g. Lobster Thermidor" style="width:100%;padding:10px;border-radius:8px;border:1px solid var(--border)">
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+              <div>
+                <label style="display:block;font-size:12px;font-weight:600;margin-bottom:4px">Price ($)</label>
+                <input id="add-dish-price" type="number" step="0.01" min="0" required placeholder="24.50" style="width:100%;padding:10px;border-radius:8px;border:1px solid var(--border)">
+              </div>
+              <div>
+                <label style="display:block;font-size:12px;font-weight:600;margin-bottom:4px">Category</label>
+                <select id="add-dish-cat" style="width:100%;padding:10px;border-radius:8px;border:1px solid var(--border)">
+                  <option value="starters">Starters</option>
+                  <option value="mains" selected>Mains</option>
+                  <option value="desserts">Desserts</option>
+                </select>
+              </div>
+            </div>
+            <div>
+              <label style="display:block;font-size:12px;font-weight:600;margin-bottom:4px">Emoji Icon</label>
+              <input id="add-dish-emoji" type="text" value="🍽️" style="width:100%;padding:10px;border-radius:8px;border:1px solid var(--border)">
+            </div>
+            <div>
+              <label style="display:block;font-size:12px;font-weight:600;margin-bottom:4px">Description</label>
+              <textarea id="add-dish-desc" rows="3" placeholder="Describe the ingredients and flavors..." style="width:100%;padding:10px;border-radius:8px;border:1px solid var(--border)"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" style="margin-top:10px">Create Dish</button>
+          </form>
         </div>
       </div>
     `;
@@ -1119,11 +1943,11 @@ function renderModal() {
       <div class="modal-backdrop">
         <div class="modal-box">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem">
-            <h2 style="font-size:20px">${dish.emoji} ${dish.name} Recipe</h2>
+            <h2 style="font-size:20px">${dish ? dish.emoji : ''} ${dish ? dish.name : ''} Recipe Specifications</h2>
             <button class="btn btn-outline btn-sm" onclick="closeModal()">✕</button>
           </div>
           <p style="font-size:13px;color:var(--muted);margin-bottom:1rem">
-            Ingredient requirements per portion and current kitchen stock availability.
+            Internal ingredient requirements per portion and current warehouse stock availability.
           </p>
           <table class="table-custom" style="margin-bottom:1.5rem">
             <thead>
@@ -1214,6 +2038,7 @@ function renderModal() {
   return '';
 }
 
+// Initial render
 render();
 </script>
 </body>

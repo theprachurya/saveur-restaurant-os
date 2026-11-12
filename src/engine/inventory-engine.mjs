@@ -133,6 +133,36 @@ export class InventoryEngine {
     return this.menu.find((m) => m.id === id);
   }
 
+  updateMenuItem(id, updates) {
+    const dish = this.menu.find((m) => m.id === id);
+    if (!dish) throw new Error("Dish not found");
+    if (updates.name !== undefined) dish.name = updates.name.trim();
+    if (updates.price !== undefined) dish.price = Math.max(0, parseFloat(parseFloat(updates.price).toFixed(2)));
+    if (updates.desc !== undefined) dish.desc = updates.desc.trim();
+    if (updates.emoji !== undefined) dish.emoji = updates.emoji.trim();
+    if (updates.cat !== undefined) dish.cat = updates.cat;
+    if (updates.isAvailable !== undefined) dish.isAvailable = Boolean(updates.isAvailable);
+    return dish;
+  }
+
+  addMenuItem(dish) {
+    const newId = dish.id || "dish_" + (this.menu.length + 1);
+    const newDish = {
+      id: newId,
+      name: dish.name.trim(),
+      price: Math.max(0, parseFloat(parseFloat(dish.price).toFixed(2))),
+      cat: dish.cat || "mains",
+      emoji: dish.emoji || "🍽️",
+      desc: (dish.desc || "").trim(),
+      isAvailable: dish.isAvailable !== undefined ? Boolean(dish.isAvailable) : true,
+    };
+    this.menu.push(newDish);
+    if (dish.recipe && Array.isArray(dish.recipe)) {
+      this.recipes[newId] = dish.recipe;
+    }
+    return newDish;
+  }
+
   getRecipe(dishId) {
     const raw = this.recipes[dishId] || [];
     return raw.map((r) => {

@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "test": "node --test test/*.test.mjs",
-    "start": "npx serve ."
+    "start": "serve . -l 3000",
+    "dev": "serve . -l 3000"
   },
   "keywords": [
     "restaurant",
@@ -15,5 +16,8 @@
     "vercel"
   ],
   "author": "Prachurya Subhasmita",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "serve": "^14.2.7"
+  }
 }
